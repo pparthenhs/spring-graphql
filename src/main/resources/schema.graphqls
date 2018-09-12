@@ -3,7 +3,7 @@ type Owner {
     name: String!
 }
 
-type Car {
+type Vehicle {
     id: ID!
     label: String!
     mark: String
@@ -14,7 +14,7 @@ type Query {
     allOwners: [Owner]
     allOwnersLastTwo (last: Int): [Owner]
     allOwnersContainsName (name: String): [Owner]
-    allCars: [Car]
+    allVehicles: [Vehicle]
 }
 
 type Mutation {

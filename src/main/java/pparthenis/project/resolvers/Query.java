@@ -27,7 +27,7 @@ public class Query implements GraphQLQueryResolver {
     return ownerRepo.findAll();
   }
 
-  public List<Car> allCars() {
+  public List<Car> allVehicles() {
     return carRepo.findAll();
   }
 
