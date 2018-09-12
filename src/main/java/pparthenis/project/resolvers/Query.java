@@ -9,6 +9,7 @@ import pparthenis.project.model.repository.CarRepo;
 import pparthenis.project.model.repository.OwnerRepo;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -37,5 +38,18 @@ public class Query implements GraphQLQueryResolver {
 
   public List<Owner> allOwnersContainsName(String name) {
     return ownerRepo.findAll().stream().filter(x -> x.getName().contains(name)).collect(Collectors.toList());
+  }
+
+  public Owner hasVehicles(String id) {
+    Optional<Owner> owner = ownerRepo.findById(id);
+    if (owner.isPresent()) {
+      if (carRepo.findAll().stream().filter(x -> x.getOwner().getId().compareTo(owner.get().getId()) == 0).count() == 0) {
+        return null;
+      } else {
+        return owner.get();
+      }
+    } else {
+      return null;
+    }
   }
 }

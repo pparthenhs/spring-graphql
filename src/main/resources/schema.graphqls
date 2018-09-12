@@ -15,6 +15,7 @@ type Query {
     allOwnersLastTwo (last: Int): [Owner]
     allOwnersContainsName (name: String): [Owner]
     allVehicles: [Vehicle]
+    hasVehicles (id: String): Owner
 }
 
 type Mutation {
