@@ -1,0 +1,26 @@
+type Owner {
+    id: ID!
+    name: String!
+}
+
+type Car {
+    id: ID!
+    label: String!
+    mark: String
+    owner: Owner!
+}
+
+type Query {
+    allOwners: [Owner]
+    allOwnersLastTwo (last: Int): [Owner]
+    allOwnersContainsName (name: String): [Owner]
+    allCars: [Car]
+}
+
+type Mutation {
+   createOwner (name: String): Owner
+}
+
+type Subscription {
+   allOwnersSub: [Owner]
+}

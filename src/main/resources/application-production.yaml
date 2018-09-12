@@ -1,0 +1,14 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  data:
+    mongodb:
+      host: ${DATABASE_URL}
+      port: ${DATABASE_PORT}
+      database: ${DATABASE_NAME}
+
+
+initialize:
+  database: ${DATABASE_INIT}
+
