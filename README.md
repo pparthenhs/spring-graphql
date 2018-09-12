@@ -1,7 +1,7 @@
 # spring-graphql
-This service combine spring with graphQl. In more details is has the 
+This service combines spring with graphQl. In more details is has the 
 following logic it has two entities Cars and Owners with relation (n:1), 
-this information are stored into mongodb, using spring Hibernate. The user 
+this information are stored into MongoDB, using spring Hibernate. The user 
 can interact with  the system using the following url using graphQl UI:
 
 ```
