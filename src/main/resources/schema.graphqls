@@ -10,12 +10,22 @@ type Vehicle {
     owner: Owner!
 }
 
+type Message {
+    text: String!
+}
+
+input Transfer{
+    ownerId: String!
+    carColor: String!
+}
+
 type Query {
     allOwners: [Owner]
     allOwnersLastTwo (last: Int): [Owner]
     allOwnersContainsName (name: String): [Owner]
     allVehicles: [Vehicle]
     hasVehicles (id: String): Owner
+    isGivenOwnerHasVehiclesWithGivenColor (object: Transfer) : Message!
 }
 
 type Mutation {

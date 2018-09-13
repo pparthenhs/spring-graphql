@@ -9,5 +9,4 @@ spring:
       database: "graphQL-sample"
 
 initialize:
-  database: true
-
+  database: false

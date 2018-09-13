@@ -3,6 +3,8 @@ package pparthenis.project.resolvers;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pparthenis.project.Transfer.CombineObject;
+import pparthenis.project.Transfer.Output;
 import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.CarRepo;
@@ -51,5 +53,19 @@ public class Query implements GraphQLQueryResolver {
     } else {
       return null;
     }
+  }
+
+  public Output isGivenOwnerHasVehiclesWithGivenColor(CombineObject combineObject) {
+    Output output = new Output();
+    Optional<Owner> owner = ownerRepo.findById(combineObject.getOwnerId());
+
+    if (owner.isPresent()) {
+      long total = carRepo.countByOwnerAndColor(owner.get(), combineObject.getCarColor());
+      output.setText("The owner id :" + " has " + total + "car with color" + combineObject.getCarColor());
+    } else {
+      output.setText("The owner id :" + "does not exist");
+    }
+
+    return output;
   }
 }
