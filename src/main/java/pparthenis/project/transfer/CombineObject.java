@@ -1,4 +1,4 @@
-package pparthenis.project.Transfer;
+package pparthenis.project.transfer;
 
 /**
  * @author Panagiotis Parthenis
