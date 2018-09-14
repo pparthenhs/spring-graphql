@@ -2,6 +2,8 @@ package pparthenis.project;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dataloader.BatchLoader;
+import org.dataloader.DataLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -11,6 +13,10 @@ import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.CarRepo;
 import pparthenis.project.model.repository.OwnerRepo;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
@@ -47,8 +53,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     }
 
     //Dataloader
-    /*
-        BatchLoader<String, Car> carBatchLoader = new BatchLoader<String, Car>() {
+    BatchLoader<String, Car> carBatchLoader = new BatchLoader<String, Car>() {
       @Override
       public CompletionStage<List<Car>> load(List<String> list) {
         return CompletableFuture.supplyAsync(() -> {
@@ -59,9 +64,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
     DataLoader<String, Car> carLoader = new DataLoader(carBatchLoader);
 
-    carLoader.load("5b9a1aff93184239b2eb2b4c");
+    // load all cars into dataloader
+    carRepo.findAll().stream().forEach(car -> carLoader.load(car.getId()));
 
-     */
+
+    List<Car> allCars = carLoader.dispatchAndJoin();
+    System.out.println(allCars.size());
 
   }
 }
