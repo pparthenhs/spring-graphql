@@ -3,12 +3,12 @@ package pparthenis.project.resolvers;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pparthenis.project.transfer.CombineObject;
-import pparthenis.project.transfer.Output;
 import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.CarRepo;
 import pparthenis.project.model.repository.OwnerRepo;
+import pparthenis.project.transfer.CombineObject;
+import pparthenis.project.transfer.Output;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,9 +61,9 @@ public class Query implements GraphQLQueryResolver {
 
     if (owner.isPresent()) {
       long total = carRepo.countByOwnerAndColor(owner.get(), combineObject.getCarColor());
-      output.setText("The owner id :" + " has " + total + "car with color" + combineObject.getCarColor());
+      output.setText("The owner id : " + combineObject.getOwnerId() + " has " + total + " car with color " + combineObject.getCarColor());
     } else {
-      output.setText("The owner id :" + "does not exist");
+      output.setText("The owner id : " + combineObject.getOwnerId() + "does not exist");
     }
 
     return output;

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 
+import java.util.List;
+
 /**
  * @author Panagiotis Parthenis
  */
@@ -12,4 +14,6 @@ import pparthenis.project.model.domain.Owner;
 public interface CarRepo extends MongoRepository<Car, String>{
 
     long countByOwnerAndColor(Owner owner, String color);
+
+    List<Car> findCarsByIdIn (List<String> keys);
 }

@@ -13,7 +13,7 @@ or using the graphQl REST endpoint :
 ```
 <SERVER_URL> : <SERVER_PORT> /graphql?query={query}
 ```
-On query you must send the graphQL JSON with information you want to retrieve.
+On query you must send the graphQL JSON with information you want to retrieve ([examples](README_examples.md)).
 
 > to see which functionality system support please visit Documentation explorer 
 at graphQl UI on your server.

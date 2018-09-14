@@ -60,4 +60,15 @@ public class Car implements Serializable {
   public void setOwner(Owner owner) {
     this.owner = owner;
   }
+
+  @Override
+  public String toString() {
+    return "Car{" +
+        "id='" + id + '\'' +
+        ", label='" + label + '\'' +
+        ", color='" + color + '\'' +
+        ", mark='" + mark + '\'' +
+        ", owner=" + owner +
+        '}';
+  }
 }

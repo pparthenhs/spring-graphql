@@ -42,10 +42,26 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
       carRepo.insert(car);
 
       LOGGER.info("initialize database");
-    }
-    else {
+    } else {
       LOGGER.info("not initialize database");
     }
+
+    //Dataloader
+    /*
+        BatchLoader<String, Car> carBatchLoader = new BatchLoader<String, Car>() {
+      @Override
+      public CompletionStage<List<Car>> load(List<String> list) {
+        return CompletableFuture.supplyAsync(() -> {
+          return carRepo.findCarsByIdIn(list);
+        });
+      }
+    };
+
+    DataLoader<String, Car> carLoader = new DataLoader(carBatchLoader);
+
+    carLoader.load("5b9a1aff93184239b2eb2b4c");
+
+     */
 
   }
 }
