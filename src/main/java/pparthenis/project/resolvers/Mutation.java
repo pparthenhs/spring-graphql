@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.OwnerRepo;
+import pparthenis.project.service.OwnerService;
 
 /**
  * @author Panagiotis Parthenis
@@ -13,12 +14,13 @@ import pparthenis.project.model.repository.OwnerRepo;
 public class Mutation implements GraphQLMutationResolver {
 
   @Autowired
-  private OwnerRepo ownerRepo;
+  private OwnerService ownerService;
 
   public Owner createOwner(String name) {
     Owner owner = new Owner();
     owner.setName(name);
 
-    return ownerRepo.insert(owner);
+    Object temp = ownerService.createOwner(owner);
+    return (Owner) temp;
   }
 }
