@@ -9,12 +9,11 @@ import java.util.Optional;
  * @author Panagiotis Parthenis
  */
 @Service
-public interface GenericService<O, ID> {
+public interface BaseService<O, ID> {
 
   List<O> retrieveAll();
 
   Optional<O> retrieveOne(ID id);
 
   O createOne(O o);
-
 }

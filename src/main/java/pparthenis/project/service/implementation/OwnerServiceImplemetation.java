@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.OwnerRepo;
-import pparthenis.project.service.GenericService;
+import pparthenis.project.service.BaseService;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Panagiotis Parthenis
  */
 @Component
-public class OwnerServiceImplemetation implements GenericService<Owner, String> {
+public class OwnerServiceImplemetation implements BaseService<Owner, String> {
 
   @Autowired
   private OwnerRepo ownerRepo;

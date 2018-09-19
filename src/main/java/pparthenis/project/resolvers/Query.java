@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.service.CarService;
-import pparthenis.project.service.GenericService;
+import pparthenis.project.service.BaseService;
 import pparthenis.project.transfer.CombineObject;
 import pparthenis.project.transfer.Output;
 
@@ -21,10 +21,7 @@ import java.util.stream.Collectors;
 public class Query implements GraphQLQueryResolver {
 
   @Autowired
-  private GenericService<Owner, String > ownerStringGenericService;
-
-  @Autowired
-  private GenericService<Car, String > carStringGenericService;
+  private BaseService<Owner, String > ownerStringGenericService;
 
   @Autowired
   private CarService carService;
@@ -34,7 +31,7 @@ public class Query implements GraphQLQueryResolver {
   }
 
   public List<Car> allVehicles() {
-    return carStringGenericService.retrieveAll();
+    return carService.retrieveAll();
   }
 
   public List<Owner> allOwnersLastTwo(int n) {
@@ -54,7 +51,7 @@ public class Query implements GraphQLQueryResolver {
 
   public Owner hasVehicles(String id) {
     Optional<Owner> owner = ownerStringGenericService.retrieveOne(id);
-    List<Car> temp = carStringGenericService.retrieveAll();
+    List<Car> temp = carService.retrieveAll();
     if (owner.isPresent()) {
       if (temp.stream().filter(x -> x.getOwner().getId().compareTo(owner.get().getId()) == 0).count() == 0) {
         return null;

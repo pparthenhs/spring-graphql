@@ -4,7 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Owner;
-import pparthenis.project.service.GenericService;
+import pparthenis.project.service.BaseService;
 
 /**
  * @author Panagiotis Parthenis
@@ -13,7 +13,7 @@ import pparthenis.project.service.GenericService;
 public class Mutation implements GraphQLMutationResolver {
 
   @Autowired
-  private GenericService<Owner,String> ownerService;
+  private BaseService<Owner,String> ownerService;
 
   public Owner createOwner(String name) {
     Owner owner = new Owner();

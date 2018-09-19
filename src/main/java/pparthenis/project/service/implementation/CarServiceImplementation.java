@@ -6,7 +6,6 @@ import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.model.repository.CarRepo;
 import pparthenis.project.service.CarService;
-import pparthenis.project.service.GenericService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ import java.util.Optional;
  * @author Panagiotis Parthenis
  */
 @Component
-public class CarServiceImplementation implements GenericService<Car, String>, CarService<Car, String> {
+public class CarServiceImplementation implements CarService<Car, String> {
 
   @Autowired
   private CarRepo carRepo;
@@ -37,7 +36,7 @@ public class CarServiceImplementation implements GenericService<Car, String>, Ca
 
   @Override
   public long countByOwnerAndColor(Owner owner, String color) {
-    return carRepo.countByOwnerAndColor(owner,color);
+    return carRepo.countByOwnerAndColor(owner, color);
   }
 
 }

@@ -7,7 +7,7 @@ import pparthenis.project.model.domain.Owner;
  * @author Panagiotis Parthenis
  */
 @Service
-public interface CarService<C,ID> {
+public interface CarService<C,ID> extends BaseService<C, ID> {
 
  long countByOwnerAndColor (Owner owner, String color);
 }
