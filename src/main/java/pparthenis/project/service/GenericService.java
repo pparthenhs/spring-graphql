@@ -1,7 +1,6 @@
 package pparthenis.project.service;
 
 import org.springframework.stereotype.Service;
-import pparthenis.project.model.domain.Owner;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,11 +9,12 @@ import java.util.Optional;
  * @author Panagiotis Parthenis
  */
 @Service
-public interface OwnerService<O, ID> {
+public interface GenericService<O, ID> {
 
-  List<O> findAllOwners();
+  List<O> retrieveAll();
 
-  Optional<O> findById (ID id);
+  Optional<O> retrieveOne(ID id);
 
-  O createOwner(O o);
+  O createOne(O o);
+
 }

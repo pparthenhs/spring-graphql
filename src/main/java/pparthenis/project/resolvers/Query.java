@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Car;
 import pparthenis.project.model.domain.Owner;
 import pparthenis.project.service.CarService;
-import pparthenis.project.service.OwnerService;
+import pparthenis.project.service.GenericService;
 import pparthenis.project.transfer.CombineObject;
 import pparthenis.project.transfer.Output;
 
@@ -21,21 +21,24 @@ import java.util.stream.Collectors;
 public class Query implements GraphQLQueryResolver {
 
   @Autowired
-  private OwnerService ownerService;
+  private GenericService<Owner, String > ownerStringGenericService;
+
+  @Autowired
+  private GenericService<Car, String > carStringGenericService;
 
   @Autowired
   private CarService carService;
 
   public List<Owner> allOwners() {
-    return ownerService.findAllOwners();
+    return ownerStringGenericService.retrieveAll();
   }
 
   public List<Car> allVehicles() {
-    return carService.findAllCars();
+    return carStringGenericService.retrieveAll();
   }
 
   public List<Owner> allOwnersLastTwo(int n) {
-    List<Owner> temp = ownerService.findAllOwners();
+    List<Owner> temp = ownerStringGenericService.retrieveAll();
 
     if (n < temp.size()) {
       return temp.subList(temp.size() - n, temp.size());
@@ -45,13 +48,13 @@ public class Query implements GraphQLQueryResolver {
   }
 
   public List<Owner> allOwnersContainsName(String name) {
-    List<Owner> temp = ownerService.findAllOwners();
+    List<Owner> temp = ownerStringGenericService.retrieveAll();
     return temp.stream().filter(x -> x.getName().contains(name)).collect(Collectors.toList());
   }
 
   public Owner hasVehicles(String id) {
-    Optional<Owner> owner = ownerService.findById(id);
-    List<Car> temp = carService.findAllCars();
+    Optional<Owner> owner = ownerStringGenericService.retrieveOne(id);
+    List<Car> temp = carStringGenericService.retrieveAll();
     if (owner.isPresent()) {
       if (temp.stream().filter(x -> x.getOwner().getId().compareTo(owner.get().getId()) == 0).count() == 0) {
         return null;
@@ -65,7 +68,7 @@ public class Query implements GraphQLQueryResolver {
 
   public Output isGivenOwnerHasVehiclesWithGivenColor(CombineObject combineObject) {
     Output output = new Output();
-    Optional<Owner> owner = ownerService.findById(combineObject.getOwnerId());
+    Optional<Owner> owner = ownerStringGenericService.retrieveOne(combineObject.getOwnerId());
 
     if (owner.isPresent()) {
       long total = carService.countByOwnerAndColor(owner.get(), combineObject.getCarColor());

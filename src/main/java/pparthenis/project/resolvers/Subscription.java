@@ -4,7 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLSubscriptionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pparthenis.project.model.domain.Owner;
-import pparthenis.project.service.OwnerService;
+import pparthenis.project.service.GenericService;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import java.util.List;
 public class Subscription implements GraphQLSubscriptionResolver {
 
   @Autowired
-  private OwnerService ownerService;
+  private GenericService<Owner,String> ownerService;
 
   public List<Owner> allOwnersSub() {
-    return ownerService.findAllOwners();
+    return ownerService.retrieveAll();
   }
 
 }
